@@ -6,6 +6,7 @@ runs:
     - name: Cleanup podman state
       shell: bash
       run: |
+        command -v podman || exit 0
         set -x
         podman ps -a              || true
         podman stop -a            || true
