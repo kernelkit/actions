@@ -46,8 +46,25 @@ No inputs.
 
 ---
 
+### `setup-mkdocs`
+
+Installs [MkDocs][] and the plugins needed to build a project's User's Guide,
+and puts the `mkdocs` binary on `PATH` for later steps (e.g. a `post-build.sh`
+that bundles the guide into an image).
+
+**Usage:**
+
+```yaml
+- uses: kernelkit/actions/setup-mkdocs@v1
+```
+
+No inputs.
+
+---
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
 
 [Buildroot]: https://buildroot.org
+[MkDocs]: https://www.mkdocs.org

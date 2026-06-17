@@ -1,0 +1,17 @@
+name: 'Setup MkDocs'
+description: "Install MkDocs and the plugins required to build a project's User's Guide (bundled into images by post-build hooks)."
+
+runs:
+  using: composite
+  steps:
+    - name: Install MkDocs and plugins
+      shell: bash
+      run: |
+        command -v pipx >/dev/null 2>&1 || python3 -m pip install --user pipx
+        python3 -m pipx install --force mkdocs
+        python3 -m pipx inject mkdocs \
+          mkdocs-material pymdown-extensions mkdocs-callouts mike mkdocs-to-pdf mkdocs-glightbox
+        # Make the pipx-installed mkdocs visible to later steps (the build,
+        # where post-build.sh invokes it).
+        python3 -m pipx environment --value PIPX_BIN_DIR >> "$GITHUB_PATH" 2>/dev/null \
+          || echo "$HOME/.local/bin" >> "$GITHUB_PATH"
